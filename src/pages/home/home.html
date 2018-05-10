@@ -8,11 +8,32 @@
 </ion-header>
 
 <ion-content padding>
-  <h3>Ionic Menu Starter</h3>
-
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
-
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+  <h3>Results and Stats shown here</h3>
+  <button ion-button full (click)="questions()">Daily Checklist</button>
+  <ion-card>
+    <ion-card-header>
+      Weekly Manic Chart
+    </ion-card-header>
+    <ion-card-content>
+      <button ion-item detail-none *ngFor="let item of hist_man">
+        {{item.date}}
+        <div class="item-note" item-end>
+          {{item.score}}
+        </div>
+      </button>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      Weekly Depressive Chart
+    </ion-card-header>
+    <ion-card-content>
+      <button ion-item detail-none *ngFor="let item of hist_dep">
+        {{item.date}}
+        <div class="item-note" item-end>
+          {{item.score}}
+        </div>
+      </button>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

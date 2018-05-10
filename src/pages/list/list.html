@@ -8,16 +8,49 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
-      <ion-icon [name]="item.icon" item-start></ion-icon>
+  <ion-item>
+    <ion-label>Checking this day</ion-label>
+    <ion-datetime displayFormat="YYYY-MM-DD" [(ngModel)]="pickedDate" (ngModelChange)="datePicked()"></ion-datetime>
+  </ion-item>
+  <ion-icon name="code-download" *ngIf="!man_items_loaded"></ion-icon>
+  <ion-list *ngIf="man_items_loaded" >
+    <ion-list-header>
+      Early signs of Mania
+    </ion-list-header>
+    <button ion-item detail-none *ngFor="let item of man_items" (click)="itemTapped($event, item)" [color]="item.color">
       {{item.title}}
       <div class="item-note" item-end>
-        {{item.note}}
+        {{item.status}}
       </div>
     </button>
   </ion-list>
-  <div *ngIf="selectedItem" padding>
-    You navigated here from <b>{{selectedItem.title}}</b>
-  </div>
+  <ion-icon name="code-download" *ngIf="!dep_items_loaded"></ion-icon>
+  <ion-list *ngIf="dep_items_loaded" >
+    <ion-list-header>
+        Early signs of Depression
+    </ion-list-header>
+    <button ion-item detail-none *ngFor="let item of dep_items" (click)="itemTapped($event, item)" [color]="item.color">
+      {{item.title}}
+      <div class="item-note" item-end>
+        {{item.status}}
+      </div>
+    </button>
+  </ion-list>
+  
+  <ion-list>
+      <ion-list-header>
+          Things to do Everyday
+      </ion-list-header>
+      <button ion-item detail-none *ngFor="let item of day_items" (click)="dailyCheck($event, item)" [color]="item.color">
+        {{item.title}}
+        <div class="item-note" item-end>
+          {{item.status}}
+        </div>
+      </button>
+  </ion-list>
+  <ion-card>
+    <ion-input placeholder="New Everyday Action" [(ngModel)]="newDayItem"></ion-input>
+    <button ion-button (click)="addNewAction()">Add new Everyday Action</button>
+  </ion-card>
+
 </ion-content>
